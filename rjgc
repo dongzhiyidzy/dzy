@@ -1,0 +1,60 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+int generateRandomNumber(int min, int max) {
+    return min + rand() % (max - min + 1);
+}
+
+void generateQuestion() {
+    int n1 = generateRandomNumber(1, 10);
+    int n2 = generateRandomNumber(1, 10);
+    int operatorIndex = generateRandomNumber(0, 3);
+    int result;
+    char operatorChar;
+    switch (operatorIndex) {
+    case 0:
+        operatorChar = '+';
+        result = n1 + n2;
+        break;
+    case 1:
+        operatorChar = '-';
+        result = n1 - n2;
+        break;
+    case 2:
+        operatorChar = '*';
+        result = n1 * n2;
+        break;
+    case 3:
+        operatorChar = '/';
+        result = n1 / n2;
+        break;
+    }
+    std::cout << "问题: " << n1 << " " << operatorChar << " " << n2 << " = ?\n";
+    int userAnswer;
+    std::cout << "输入你的答案: ";
+    std::cin >> userAnswer;
+    if (userAnswer == result) {
+        std::cout << "回答正确!\n";
+    }
+    else {
+        std::cout << "答案错误！正确答案： " << result << ".\n";
+    }
+}
+
+int main() {
+    srand(time(0));
+    std::cout << "欢迎使用初等算术程序!\n";
+    while (1) {
+        std::cout << "\n";
+        generateQuestion();
+        char continueChoice;
+        std::cout << "你想要继续吗? (Y/N) ";
+        std::cin >> continueChoice;
+        if (continueChoice != 'Y' && continueChoice != 'y') {
+            break;
+        }
+    }
+    std::cout << "感谢使用本程序!\n";
+    return 0;
+}
